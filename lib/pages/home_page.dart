@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoe_shop/pages/account_page.dart';
 import 'package:shoe_shop/pages/cart_page.dart';
 import 'package:shoe_shop/widgets/product_list.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentPage = 0;
 
-  List<Widget> pages = const [ProductList(), CartPage()];
+  List<Widget> pages = const [ProductList(), CartPage(), AccountPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.shopping_cart),
             label: '',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: '')
         ],
       ),
     );
