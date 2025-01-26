@@ -12,24 +12,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CartProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+      ],
       child: MaterialApp(
-        title: 'Shoe Shop',
+        title: 'Shopping App',
         theme: ThemeData(
           fontFamily: 'Lato',
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Color.fromRGBO(254, 206, 1, 1),
-            primary: Color.fromRGBO(254, 206, 1, 1),
+            seedColor: const Color.fromRGBO(254, 206, 1, 1),
+            primary: const Color.fromRGBO(254, 206, 1, 1),
           ),
-          inputDecorationTheme: InputDecorationTheme(
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
             ),
-            prefixIconColor: Color.fromRGBO(119, 119, 118, 1),
           ),
-          textTheme: TextTheme(
+          inputDecorationTheme: const InputDecorationTheme(
+            hintStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+            prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
+          ),
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 35,
+            ),
             titleMedium: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -38,20 +50,10 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
-            titleLarge: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 35,
-            ),
-          ),
-          appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-            ),
           ),
           useMaterial3: true,
         ),
-        home: HomePage(),
+        home: const HomePage(),
       ),
     );
   }

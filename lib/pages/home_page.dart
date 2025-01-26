@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPage = 0;
+
   List<Widget> pages = const [ProductList(), CartPage()];
 
   @override
@@ -33,12 +34,12 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
-            label: 'Cart',
-          )
+            icon: Icon(Icons.shopping_cart),
+            label: '',
+          ),
         ],
       ),
     );

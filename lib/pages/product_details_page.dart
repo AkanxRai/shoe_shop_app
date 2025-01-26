@@ -4,7 +4,10 @@ import 'package:shoe_shop/providers/cart_provider.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final Map<String, Object> product;
-  const ProductDetailsPage({super.key, required this.product});
+  const ProductDetailsPage({
+    super.key,
+    required this.product,
+  });
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -12,6 +15,7 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   int selectedSize = 0;
+
   void onTap() {
     if (selectedSize != 0) {
       Provider.of<CartProvider>(context, listen: false).addProduct(
@@ -20,19 +24,19 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           'title': widget.product['title'],
           'price': widget.product['price'],
           'imageUrl': widget.product['imageUrl'],
-          'company': widget.product['comapny'],
+          'company': widget.product['company'],
           'size': selectedSize,
         },
       );
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Product added to cart!"),
+        const SnackBar(
+          content: Text('Product added successfully!'),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Please select a size!"),
+        const SnackBar(
+          content: Text('Please select a size!'),
         ),
       );
     }
@@ -42,11 +46,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Details"),
-        centerTitle: true,
+        title: const Text('Details'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             widget.product['title'] as String,
@@ -60,21 +62,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               height: 250,
             ),
           ),
-          const Spacer(
-            flex: 2,
-          ),
+          const Spacer(flex: 2),
           Container(
             height: 250,
-            width: double.infinity,
             decoration: BoxDecoration(
-              color: Color.fromRGBO(245, 247, 249, 1),
+              color: const Color.fromRGBO(245, 247, 249, 1),
               borderRadius: BorderRadius.circular(40),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "\$${widget.product['price']}",
+                  '\$${widget.product['price']}',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 10),
@@ -83,9 +82,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: (widget.product['sizes'] as List<int>).length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
                       final size =
                           (widget.product['sizes'] as List<int>)[index];
+
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
@@ -96,8 +96,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           },
                           child: Chip(
                             label: Text(size.toString()),
-                            backgroundColor: size == selectedSize
-                                ? Theme.of(context).primaryColor
+                            backgroundColor: selectedSize == size
+                                ? Theme.of(context).colorScheme.primary
                                 : null,
                           ),
                         ),
@@ -107,17 +107,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: ElevatedButton.icon(
-                    icon: Icon(Icons.shopping_cart),
+                  child: ElevatedButton(
                     onPressed: onTap,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      fixedSize: Size(350, 50),
-                      iconColor: Colors.black,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      fixedSize: const Size(350, 50),
                     ),
-                    label: Text(
-                      "Add to Cart",
-                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    child: const Text(
+                      'Add To Cart',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
